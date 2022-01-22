@@ -46,20 +46,20 @@
 }
 
 .header__option {
-    display: flex;
-    flex-direction: column;
+    display: flex  !important;
+    flex-direction: column !important;
     margin-left: 10px;
     margin-right: 10px;
     color: white;
 }
 
 .header__optionLineOne {
-    font-size: 10px;
+    font-size: 10px !important;
 }
 
 .header__optionLineTwo {
-    font-size: 13px;
-    font-weight: 800;
+    font-size: 13px !important;
+    font-weight: 800 !important;
 }
 
 .header__optionBasket {

@@ -1,8 +1,28 @@
 import React from 'react';
 import '../assets/css/Product.css'
+import { useStateValue } from '../contentAPI/StateProvider';
+
+let idGenerate = 0;
 
 function Product({ id, title, price, image, rating }) {
-  return (
+    const [state, dispatch] = useStateValue();
+
+    const addToBasket = () => {
+        idGenerate++;
+        dispatch ({
+            type: "ADD_TO_CART",
+            item: {
+                primaryKey: idGenerate, 
+                id: id,
+                title: title,
+                image: image,
+                price: price,
+                rating: rating
+            }
+        })
+    }
+
+    return (
     <div className='product'>
         <div className='product__info'>
             <p>{title}</p>
@@ -22,7 +42,7 @@ function Product({ id, title, price, image, rating }) {
             alt="" 
         />
 
-        <button>Add to Cart</button>
+        <button onClick={addToBasket}>Add to Cart</button>
     </div>
   );
 }
