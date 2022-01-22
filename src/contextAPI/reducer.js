@@ -1,5 +1,6 @@
 export const initialState = {
     cart: [],
+    user: null
 };
 
 //Selectors
@@ -20,6 +21,11 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 cart: state.cart.filter((item) => item.primaryKey !== action.primaryKey)
+            }
+        case "SET_USER":
+            return {
+                ...state,
+                user: action.user
             }
         default:
             return state;

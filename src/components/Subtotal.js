@@ -1,8 +1,8 @@
 import React from 'react';
 import '../assets/css/Subtotal.css';
 import CurrencyFormat from "react-currency-format";
-import { useStateValue } from '../contentAPI/StateProvider';
-import { getCartTotal } from '../contentAPI/reducer';
+import { useStateValue } from '../contextAPI/StateProvider';
+import { getCartTotal } from '../contextAPI/reducer';
 
 function Subtotal() {
     const [state, dispatch] = useStateValue();

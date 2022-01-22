@@ -1,6 +1,6 @@
 import React from 'react';
 import '../assets/css/CheckoutProduct.css';
-import { useStateValue } from '../contentAPI/StateProvider';
+import { useStateValue } from '../contextAPI/StateProvider';
 
 function CheckoutProduct({ primaryKey, id, image, title, price, rating }) {
     const [{ cart }, dispatch] = useStateValue();

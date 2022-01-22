@@ -1,6 +1,6 @@
 import React from 'react';
 import '../assets/css/Product.css'
-import { useStateValue } from '../contentAPI/StateProvider';
+import { useStateValue } from '../contextAPI/StateProvider';
 
 let idGenerate = 0;
 

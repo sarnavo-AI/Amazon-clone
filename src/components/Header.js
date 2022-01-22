@@ -3,10 +3,17 @@ import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import '../assets/css/Header.css'
 import { Link } from 'react-router-dom';
-import { useStateValue } from '../contentAPI/StateProvider';
+import { useStateValue } from '../contextAPI/StateProvider';
+import { auth } from '../Firebase';
 
 function Header() { 
-    const [{ cart }, dispatch] = useStateValue();
+    const [{ cart, user }, dispatch] = useStateValue();
+
+    const handleAuthentication = () => {
+        if(user) {
+            auth.signOut();
+        }
+    }
 
     return ( 
         <div className='header'>
@@ -20,17 +27,16 @@ function Header() {
             </div>
 
             <div className='header__nav'>
-                <div className='header__option'>
-                    <Link to="/login" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', color: 'white'}}>
-                        <span className='header__optionLineOne' >
-                            Hello Guest
-                        </span>
-                        <span className='header__optionLineTwo'>
-                            Sign In
-                        </span>
-                    </Link>
-                </div>
-
+                <Link to={ !user && '/login' } >
+                    <div onClick={handleAuthentication} className='header__option'>
+                            <span className='header__optionLineOne' >
+                                Hello Guest
+                            </span>
+                            <span className='header__optionLineTwo'>
+                                Sign { user ? "Out" : "In" }
+                            </span>
+                    </div>
+                </Link>
                 <div className='header__option'>
                     <span className='header__optionLineOne'>
                         Returns
