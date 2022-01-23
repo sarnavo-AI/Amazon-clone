@@ -4,9 +4,20 @@ import { useStateValue } from '../contextAPI/StateProvider';
 import CheckoutProduct from './CheckoutProduct';
 import Subtotal from './Subtotal';
 
-function Checkout() {
-    const [{ cart }, dispatch] = useStateValue();
+var userName;
 
+function Checkout() {
+    const [{ cart, user }, dispatch] = useStateValue();
+
+    if(user) {
+        let userEmail = user.user._delegate.email;
+        var index = userEmail.indexOf("@");
+        console.log(index);
+        userName = userEmail.slice(0, index);
+    }
+    else {
+        userName = "Guest";
+    }
     return (
         <div className='checkout'>
             <div className='checkout__left'>
@@ -17,6 +28,7 @@ function Checkout() {
                 />
 
                 <div>
+                    <h3 className='checkout__username'>Hello, { userName }!</h3>
                     <h2 className='checkout__title'>
                         Your Shopping Cart
                     </h2>

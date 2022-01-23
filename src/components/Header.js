@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import '../assets/css/Header.css'
@@ -12,7 +12,22 @@ function Header() {
     const handleAuthentication = () => {
         if(user) {
             auth.signOut();
+            dispatch({
+                type: "SET_USER",
+                user: null
+              })
         }
+    }
+
+    var userName;
+    if(user) {
+        let userEmail = user.user._delegate.email;
+        var index = userEmail.indexOf("@");
+        console.log(index);
+        userName = userEmail.slice(0, index);
+    }
+    else {
+        userName = "Guest";
     }
 
     return ( 
@@ -30,7 +45,7 @@ function Header() {
                 <Link to={ !user && '/login' } >
                     <div onClick={handleAuthentication} className='header__option'>
                             <span className='header__optionLineOne' >
-                                Hello Guest
+                                Hello { userName }
                             </span>
                             <span className='header__optionLineTwo'>
                                 Sign { user ? "Out" : "In" }

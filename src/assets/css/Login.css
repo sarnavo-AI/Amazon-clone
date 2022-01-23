@@ -38,6 +38,7 @@
 .login__container > form > input {
     height: 30px;
     margin-bottom: 10px;
+    border-radius: 3px;
     outline: none;
     background-color: white;
     width: 98%;

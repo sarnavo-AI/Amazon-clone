@@ -12,25 +12,27 @@ function App() {
 
   const [state, dispatch] = useStateValue();
 
-  useEffect(() => {
-    // will run once when the app loads
-    auth.onAuthStateChanged(authUser => {
-      if(authUser) {
-        dispatch({
-          // logged in
-          type: "SET_USER",
-          user: authUser
-        })
-      }
-      else {
-        // logged out
-        dispatch({
-          type: "SET_USER",
-          user: null
-        })
-      }
-    })
-  })
+//       useEffect(() => {
+//         // will run once when the app loads
+//     //   const subcribe = auth.onAuthStateChanged(authUser => {
+//     //     if(authUser) {
+//     //         dispatch({
+//     //         // logged in
+//     //         type: "SET_USER",
+//     //         user: authUser
+//     //         })
+//     //     }
+//     //     else {
+//     //         // logged out
+//     //         dispatch({
+//     //         type: "SET_USER",
+//     //         user: null
+//     //         })
+//     //     }
+//     // })
+//     // return subcribe;
+//     console.log("Wassup!")
+// })
 
   return (
     <BrowserRouter>

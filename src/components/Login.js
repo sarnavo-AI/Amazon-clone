@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import '../assets/css/Login.css'
+import { useStateValue } from '../contextAPI/StateProvider';
 import { auth } from '../Firebase';
 
 function Login() {
   const history = useHistory();
+  const [state, dispatch] = useStateValue();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -13,7 +15,14 @@ function Login() {
     auth
         .signInWithEmailAndPassword(email, password)
         .then(auth => {
+          console.log("Signed In");
           history.push('/')
+          console.log(auth)
+          dispatch({
+            // logged in
+            type: "SET_USER",
+            user: auth
+          })
         })
         .catch(error => alert(error.message))
   }
@@ -25,9 +34,14 @@ function Login() {
     .createUserWithEmailAndPassword(email, password)
     .then((auth) => {
       //Success
-      console.log(auth);
+      console.log("Successfully created an account");
       if(auth) {
         history.push('/')
+        dispatch({
+          // logged in
+          type: "SET_USER",
+          user: auth
+        })
       }
     })
     .catch(error => alert(error.message))
@@ -51,6 +65,7 @@ function Login() {
                 <input 
                   type="text" 
                   value={email}
+                  placeholder='Enter your Email'
                   onChange={e => setEmail(e.target.value)}
                 />
 
@@ -58,6 +73,7 @@ function Login() {
                 <input 
                   type="password"
                   value={password}
+                  placeholder='Enter your Password'
                   onChange={e => setPassword(e.target.value)} 
                 />
 
